@@ -1,15 +1,14 @@
 package com.example.Banking_system.controller;
 
-import com.example.Banking_system.dto.BankResponse;
-import com.example.Banking_system.dto.CreditDebitRequest;
-import com.example.Banking_system.dto.EnquiryRequest;
-import com.example.Banking_system.dto.UserRequest;
+import com.example.Banking_system.dto.*;
 import com.example.Banking_system.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/user")
+@Tag(name = "User Account Management APIS")
 public class UserController {
     @Autowired
     UserService userService;
@@ -36,5 +35,9 @@ public class UserController {
     @PostMapping("debit")
     public BankResponse debitAccount(@RequestBody CreditDebitRequest request){
         return userService.debitAccount(request);
+    }
+    @PostMapping("transfer")
+    public BankResponse transfer(@RequestBody TransferRequest request){
+        return userService.transfer(request);
     }
 }
